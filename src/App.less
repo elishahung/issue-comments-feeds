@@ -1,3 +1,7 @@
+@title-background-color: #f6f8fa;
+@border-color: #d1d5da;
+@border-radius: 6px;
+
 .comment-feed-list {
   width: 100%;
   height: 100%;
@@ -6,15 +10,52 @@
   align-items: center;
 
   .comment-feed {
-    border: darkgray 2px solid;
+    border: 1px solid @border-color;
+    border-radius: @border-radius;
     max-width: 600px;
     width: 100%;
     margin: 32px 0;
-    padding: 16px;
 
-    img {
-      max-width: 100%;
-      display: block;
+    .meta {
+      height: 40px;
+      background-color: @title-background-color;
+      border-bottom: 1px solid @border-color;
+      border-top-left-radius: @border-radius;
+      border-top-right-radius: @border-radius;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #586069;
+
+      .username {
+        color: #24292e;
+        font-weight: 700;
+        text-decoration: none;
+        &:hover {
+          color: #0366d6;
+          text-decoration: underline;
+        }
+      }
+
+      img {
+        height: 80%;
+        border-radius: 50%;
+        margin: 0 8px;
+      }
+    }
+    .markdown {
+      padding: 15px;
+
+      p {
+        font-size: 14px;
+      }
+      a {
+        display: block;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
     }
   }
 }
