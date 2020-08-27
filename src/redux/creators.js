@@ -3,6 +3,17 @@ import base64 from 'base-64';
 import { authToken } from '../setting'
 
 
+const trimNewline = (content, trimText) => {
+  if (content.startsWith(trimText)) {
+    content = content.substring(trimText.length);
+  }
+  if (content.endsWith(trimText)) {
+    content = content.substring(0, content.length-trimText.length);
+  }
+  return content
+};
+
+
 export const fetchComments = () => {
   return (dispatch, getState) => {
     dispatch(ui.actions.startFetching());
@@ -65,7 +76,7 @@ export const fetchComments = () => {
       if (text) {
         let markdownBody = text.split('aaanewlineaaa')
         fetchComments.forEach((comment, index) => {
-          comment.body = markdownBody[index];
+          comment.body = trimNewline(markdownBody[index], '<br>');
         });
         dispatch(comments.actions.addComments(fetchComments));
       }
