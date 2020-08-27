@@ -1,8 +1,11 @@
+@import '~github-markdown-css/github-markdown.css';
 @title-background-color: #f6f8fa;
 @border-color: #d1d5da;
 @border-radius: 6px;
 
+
 .comment-feed-list {
+  max-width: 100%;
   width: 100%;
   height: 100%;
   display: flex;
@@ -10,11 +13,12 @@
   align-items: center;
 
   .comment-feed {
+    box-sizing: border-box;
     border: 1px solid @border-color;
     border-radius: @border-radius;
-    max-width: 600px;
-    width: 100%;
-    margin: 32px 0;
+    max-width: 800px;
+    width: 90%;
+    margin: 16px 0;
 
     .meta {
       height: 40px;
@@ -27,6 +31,12 @@
       font-size: 14px;
       color: #586069;
 
+      img {
+        height: 80%;
+        border-radius: 50%;
+        margin: 0 8px;
+      }
+
       .username {
         color: #24292e;
         font-weight: 700;
@@ -37,25 +47,10 @@
         }
       }
 
-      img {
-        height: 80%;
-        border-radius: 50%;
-        margin: 0 8px;
-      }
     }
-    .markdown {
+    .markdown-body {
       padding: 15px;
-
-      p {
-        font-size: 14px;
-      }
-      a {
-        display: block;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
+      font-size: 90%;
     }
   }
 }

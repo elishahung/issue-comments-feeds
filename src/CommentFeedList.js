@@ -11,22 +11,21 @@ const CommentFeedList = () => {
   const ui = useSelector(state => state.ui);
   const dispatch = useDispatch();
 
-  return (
-    <div className="comment-feed-list">
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={() => dispatch(fetchComments())}
-        hasMore={!ui.isFetching && ui.page !== -1 && ui.stat !== 'FAIL'}
-        threshold={500}
-        useWindow={true}
-      >
-        {comments.map(comment => {
-          return (
-            <CommentFeed key={comment.id} comment={comment}/>
-          )
-        })}
-      </InfiniteScroll>
-    </div>
+return (
+    <InfiniteScroll
+      className='comment-feed-list'
+      pageStart={0}
+      loadMore={() => dispatch(fetchComments())}
+      hasMore={!ui.isFetching && ui.page !== -1 && ui.stat !== 'FAIL'}
+      threshold={1024}
+      useWindow={true}
+    >
+      {comments.map(comment => {
+        return (
+          <CommentFeed key={comment.id} comment={comment}/>
+        )
+      })}
+    </InfiniteScroll>
   )
 };
 

@@ -1,21 +1,26 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown'
-import TimeAgo from 'timeago-react';
+import moment from 'moment';
 
 
 const CommentFeed = props => {
   const { comment } = props;
+
+  // moment
+  const commentDate = moment(comment.updated_at);
+  const now = new moment();
+  const toNowDays = now.diff(commentDate, 'days');
+
+
   return (
     <div className="comment-feed">
       <div className='meta'>
         <img src={comment.user.avatar_url} alt='avatar' />
-        <a href={comment.user.html_url} target='_blank' className={'username'}>{comment.user.login}</a>
+        <a href={comment.user.html_url} target='_blank' rel="noopener noreferrer" className={'username'}>{comment.user.login}</a>
         <span>&nbsp;commented&nbsp;</span>
-        <TimeAgo
-          datetime={comment.updated_at}
-        />
+        <span className='date'>{toNowDays < 3 ? commentDate.fromNow() : commentDate.format('[on ]D MMM')}</span>
       </div>
-      <ReactMarkdown className='markdown' source={comment.body} />
+      <ReactMarkdown className='markdown-body' source={comment.body} />
     </div>
   )
 };
