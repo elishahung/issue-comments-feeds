@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown'
 import moment from 'moment';
 
 
@@ -11,7 +10,6 @@ const CommentFeed = props => {
   const now = new moment();
   const toNowDays = now.diff(commentDate, 'days');
 
-
   return (
     <div className="comment-feed">
       <div className='meta'>
@@ -20,7 +18,7 @@ const CommentFeed = props => {
         <span>&nbsp;commented&nbsp;</span>
         <span className='date'>{toNowDays < 3 ? commentDate.fromNow() : commentDate.format('[on ]D MMM')}</span>
       </div>
-      <ReactMarkdown className='markdown-body' source={comment.body} />
+      <div className='markdown-body' dangerouslySetInnerHTML={{__html: comment.body}} />
     </div>
   )
 };

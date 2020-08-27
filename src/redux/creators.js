@@ -24,6 +24,8 @@ export const fetchComments = () => {
       );
     }
 
+    let fetchComments = undefined;
+
     const request_url =
       `https://api.github.com/repos/${repo}/issues/comments?` +
       `sort=${params.sort}&` +
@@ -41,15 +43,32 @@ export const fetchComments = () => {
       }
     }).then(data => {
       if (!data) {
-        return
+        return;
       }
       if (data.length === 0) {
         dispatch(ui.actions.finishPage())
         return;
       }
       dispatch(ui.actions.increPage());
-      dispatch(comments.actions.addComments(data));
-    }).then(() => {
+      fetchComments = data;
+      let text = fetchComments.map(comment => {return comment.body}).join('\r\naaanewlineaaa\r\n');
+      return fetch('https://api.github.com/markdown', {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify({
+          mode: 'gfm',
+          context: repo,
+          text: text
+        })
+      }).then(resp => {if (resp) {return resp.text()}});
+    }).then(text => {
+      if (text) {
+        let markdownBody = text.split('aaanewlineaaa')
+        fetchComments.forEach((comment, index) => {
+          comment.body = markdownBody[index];
+        });
+        dispatch(comments.actions.addComments(fetchComments));
+      }
       dispatch(ui.actions.finishFetching());
     });
   };
