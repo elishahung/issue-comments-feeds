@@ -24,12 +24,13 @@ export const comments = createSlice({
 export const ui = createSlice({
   name: 'ui',
   initialState: {
-    repo: 'moonshinevfx/4drec',
+    repo: undefined,
     page: 1,
     isFetching: false,
     issueTitleTable: {}
   },
   reducers: {
+    applyRepo: (state, action) => {state.repo = action.payload},
     increPage: state => {state.page = state.page + 1},
     finishPage: state => {state.page = -1},
     startFetching: state => {state.isFetching = true},

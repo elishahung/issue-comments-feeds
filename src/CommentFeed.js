@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import IssueTitle from "./IssueTitle";
+import { DATE_DISPLAY_THRESHOLD } from "./utility/setting";
 
 
 const CommentFeed = props => {
@@ -10,7 +11,12 @@ const CommentFeed = props => {
   // moment
   const commentDate = moment(comment.updated_at);
   const toNowDays = (new moment()).diff(commentDate, 'days');
-  const commentText = toNowDays < 3 ? commentDate.fromNow() : commentDate.format('[on ]D MMM');
+  let commentText;
+  if (toNowDays < DATE_DISPLAY_THRESHOLD) {
+    commentText = commentDate.fromNow();
+  }else{
+    commentText = commentDate.format('[on ]D MMM');
+  }
 
   // get issue url
   const issueUrl = 'title' in comment ? comment.url : comment.issue_url;

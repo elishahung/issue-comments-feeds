@@ -1,8 +1,5 @@
 import base64 from "base-64";
-import { authToken } from "./setting";
-
-
-const DIVIDE_PATTERN = 'aaanewlineaaa';
+import { DIVIDE_PATTERN } from "./setting";
 
 
 const trimNewline = (content, trimText) => {
@@ -20,7 +17,7 @@ export const fetchGithub = (path, params={}, options={}) => {
   if (process.env.NODE_ENV !== 'production') {
     headers.set(
       'Authorization',
-      'Basic ' + base64.encode(authToken)
+      'Basic ' + base64.encode(process.env.REACT_APP_GITHUB_AUTH)
     );
   }
 

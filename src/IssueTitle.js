@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux'
 
 const IssueTitle = props => {
   const { issueUrl } = props;
-  const issueTitleTable = useSelector(state => state.ui.issueTitleTable);
+  const issueTitleTable = useSelector(
+    state => state.ui.issueTitleTable[issueUrl]
+  );
   let issueText = issueUrl.split('/').pop();
   let htmlUrl = '';
-  if (issueUrl in issueTitleTable) {
-    issueText = issueTitleTable[issueUrl].title;
-    htmlUrl = issueTitleTable[issueUrl].url;
+  if (issueTitleTable) {
+    issueText = issueTitleTable.title;
+    htmlUrl = issueTitleTable.url;
   }
 
   return (

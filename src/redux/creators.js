@@ -1,6 +1,20 @@
+import moment from 'moment';
+
 import { ui, comments, issues } from './core';
 import { fetchGithub, renderMarkdown } from "../utility/tools";
-import moment from 'moment';
+import { AUTO_LOAD_PER_PAGE, ROOT_PATH } from "../utility/setting";
+
+
+export const applyRepo = () => {
+  return (dispatch) => {
+    const parsePath = window.location.pathname.replace(
+      `/${ROOT_PATH}/`, ''
+    );
+    if (parsePath !== '') {
+      dispatch(ui.actions.applyRepo(parsePath));
+    }
+  };
+};
 
 
 export const fetchIssues = page => {
@@ -64,7 +78,7 @@ export const fetchComments = () => {
     return fetchGithub(`/repos/${repo}/issues/comments`, {
       sort: 'updated',
       direction: 'desc',
-      per_page: 20,
+      per_page: AUTO_LOAD_PER_PAGE,
       page: page
     }).then(resp => {
       if (resp.status === 200) {
