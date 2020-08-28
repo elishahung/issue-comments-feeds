@@ -7,8 +7,8 @@
       const port = location.port ? `:${location.port}` : '';
       const host = `${location.protocol}//${location.hostname}${port}`
       const paths = location.pathname.slice(1).split('/')
-      const path = paths.slice(0, 2).join('/')
-      const repo = paths.slice(2).join('/')
+      const path = paths.slice(0, 1).join('/')
+      const repo = paths.slice(1).join('/')
 
       location.replace(`${host}/${path}/?repo=${repo}`);
     </script>
