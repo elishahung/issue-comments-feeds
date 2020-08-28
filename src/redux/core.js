@@ -37,7 +37,7 @@ export const ui = createSlice({
     startFetching: state => {state.isFetching = true},
     finishFetching: state => {state.isFetching = false},
     addIssueTitleTable: (state, action) => {
-      state.issueTitleTable = {...state, ...action.payload};
+      state.issueTitleTable = {...state.issueTitleTable, ...action.payload};
     },
     triggerError: (state, action) => {
       state.errorMessage = [...state.errorMessage, action.payload];
