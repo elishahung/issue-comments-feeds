@@ -19,7 +19,9 @@ const CommentFeed = props => {
   }
 
   // get issue url
-  const issueUrl = 'title' in comment ? comment.url : comment.issue_url;
+  const isIssue = 'title' in comment;
+  const issueUrl = isIssue ? comment.url : comment.issue_url;
+  const actionText = isIssue ? 'created issue' : 'commented'
 
   return (
     <div className="comment-feed">
@@ -35,7 +37,7 @@ const CommentFeed = props => {
           {comment.user.login}
         </a>
         {/*comment date*/}
-        <span className='commented'>&nbsp;commented</span>
+        <span className='commented'>&nbsp;{actionText}</span>
         <span className='date'>&nbsp;{commentText}</span>
         <IssueTitle issueUrl={issueUrl} />
       </div>
