@@ -1,7 +1,14 @@
 @import '~github-markdown-css/github-markdown.css';
-@title-background-color: #f6f8fa;
 @border-color: #d1d5da;
 @border-radius: 6px;
+@link-color: #0366d6;
+
+
+@media screen and (max-width:400px){
+  .commented {
+    display: none;
+  }
+}
 
 
 .comment-feed-list {
@@ -22,7 +29,7 @@
 
     .meta {
       height: 40px;
-      background-color: @title-background-color;
+      background-color: #f6f8fa;
       border-bottom: 1px solid @border-color;
       border-top-left-radius: @border-radius;
       border-top-right-radius: @border-radius;
@@ -30,11 +37,12 @@
       align-items: center;
       font-size: 14px;
       color: #586069;
+      padding: 0 8px;
 
       img {
         height: 80%;
         border-radius: 50%;
-        margin: 0 8px;
+        margin-right: 8px;
       }
 
       .username {
@@ -42,7 +50,25 @@
         font-weight: 700;
         text-decoration: none;
         &:hover {
-          color: #0366d6;
+          color: @link-color;
+          text-decoration: underline;
+        }
+      }
+
+      .date {
+        white-space: nowrap;
+      }
+
+      .issue-title {
+        padding-left: 8px;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin-left: auto;
+        color: @link-color;
+        text-decoration: none;
+        &:hover {
           text-decoration: underline;
         }
       }
