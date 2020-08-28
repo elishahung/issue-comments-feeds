@@ -2,17 +2,21 @@ import moment from 'moment';
 
 import { ui, comments, issues } from './core';
 import { fetchGithub, renderMarkdown } from "../utility/tools";
-import { AUTO_LOAD_PER_PAGE, ROOT_PATH } from "../utility/setting";
+import { AUTO_LOAD_PER_PAGE} from "../utility/setting";
 
 
 export const applyRepo = () => {
   return (dispatch) => {
-    const parsePath = window.location.pathname.replace(
-      `/${ROOT_PATH}/`, ''
+    const params = new URLSearchParams(window.location.search);
+    const repo = params.get('repo');
+
+    if (!repo) return;
+
+    window.history.replaceState(null, null,
+      window.location.pathname + repo
     );
-    if (parsePath !== '') {
-      dispatch(ui.actions.applyRepo(parsePath));
-    }
+
+    dispatch(ui.actions.applyRepo(repo));
   };
 };
 

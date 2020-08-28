@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>404</title>
-    <script type="text/javascript" src="./ghspa.js"></script>
+    <script type="text/javascript">
+      const port = location.port ? `:${location.port}` : '';
+      const host = `${location.protocol}//${location.hostname}${port}`
+      const paths = location.pathname.slice(1).split('/')
+      const path = paths.slice(0, 1).join('/')
+      const repo = paths.slice(1).join('/')
+
+      location.replace(`${host}/${paths}/?repo=${repo}`);
+    </script>
 </head>
 <body>
     this is 404 page for redirect.
