@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { rootReducer } from './redux/core';
+import { applyRepo } from "./redux/creators";
 
 
 const middleware = [
@@ -22,6 +23,8 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: middleware
 });
+
+store.dispatch(applyRepo());
 
 
 ReactDOM.render(
