@@ -24,6 +24,7 @@ export const comments = createSlice({
 export const ui = createSlice({
   name: 'ui',
   initialState: {
+    errorMessage: [],
     repo: undefined,
     page: 1,
     isFetching: false,
@@ -37,6 +38,9 @@ export const ui = createSlice({
     finishFetching: state => {state.isFetching = false},
     addIssueTitleTable: (state, action) => {
       state.issueTitleTable = {...state, ...action.payload};
+    },
+    triggerError: (state, action) => {
+      state.errorMessage = [...state.errorMessage, action.payload];
     }
   }
 });

@@ -34,6 +34,9 @@ export const fetchIssues = page => {
       if (resp.status === 200) {
         return resp.json();
       }
+      resp.text().then(
+        text => dispatch(ui.actions.triggerError(text))
+      )
     }).then(data => {
       if (!data) return;
       if (data.length === 0) return;
@@ -88,6 +91,9 @@ export const fetchComments = () => {
       if (resp.status === 200) {
         return resp.json();
       }
+      resp.text().then(
+        text => dispatch(ui.actions.triggerError(text))
+      )
     }).then(data => {
       // no comments
       console.log()
