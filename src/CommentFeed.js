@@ -21,7 +21,7 @@ const CommentFeed = props => {
   // get issue url
   const isIssue = 'title' in comment;
   const issueUrl = isIssue ? comment.url : comment.issue_url;
-  const actionText = isIssue ? 'created issue' : 'commented'
+  const actionText = isIssue ? 'created' : 'commented'
 
   return (
     <div className="comment-feed">
